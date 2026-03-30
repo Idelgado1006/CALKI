@@ -47,17 +47,19 @@
         <span class="dismiss">🗙</span>
     </div>
 <script src="_framework/blazor.webassembly.js" autostart="false"></script>
-<script>
-  if (window.Blazor) {
-    Blazor.start({
-      loadBootResource: function (type, name, defaultUri, integrity) {
-        return defaultUri;
+    <script>
+      // Verificamos si el archivo de Blazor realmente se cargó antes de iniciarlo
+      if (typeof Blazor !== 'undefined') {
+        Blazor.start({
+          loadBootResource: function (type, name, defaultUri, integrity) {
+            // Esto evita el error de "integrity" en GitHub Pages
+            return defaultUri;
+          }
+        });
+      } else {
+        console.error("ERROR: El archivo blazor.webassembly.js no se cargó. Posible error de ruta (base href).");
       }
-    });
-  } else {
-    console.error("Blazor no se cargó. Revisa si la carpeta _framework existe en GitHub.");
-  }
-</script>
+    </script>
 </body>
 
 </html>
