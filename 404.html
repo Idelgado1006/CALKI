@@ -4,13 +4,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GradeMaster</title>
+    <title>CALKI - GradeMaster</title>
     <base href="/CALKI/" />
+    
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+    <meta name="theme-color" content="#005da4" />
+
     <link href="_framework/dotnet.64cm165bxn.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-1m/uVm9i8l1DygyXEvdgzEYFYXjjAFprjBcMfgylrBk=" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <link href="GradeMaster.styles.css" rel="stylesheet" />
+    
     <script type="importmap">{
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.66stpp682q.js",
@@ -46,18 +52,23 @@
         <a href="." class="reload">Reload</a>
         <span class="dismiss">🗙</span>
     </div>
-<script src="_framework/blazor.webassembly.66stpp682q.js" autostart="false"></script>
 
-<script>
-  // El resto del script se queda igual
-  if (typeof Blazor !== 'undefined' || window.Blazor) {
-    Blazor.start({
-      loadBootResource: function (type, name, defaultUri, integrity) {
-        return defaultUri;
+    <script src="_framework/blazor.webassembly.66stpp682q.js" autostart="false"></script>
+    <script>
+      // 1. Inicio forzado de Blazor (Ya comprobado)
+      Blazor.start({
+        loadBootResource: function (type, name, defaultUri, integrity) {
+          return defaultUri;
+        }
+      });
+
+      // 2. Registro de Service Worker para instalación
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log("Service Worker: Registrado"))
+          .catch(err => console.error("Service Worker: Falló", err));
       }
-    });
-  }
-</script>
+    </script>
 </body>
 
 </html>
