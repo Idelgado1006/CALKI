@@ -46,20 +46,18 @@
         <a href="." class="reload">Reload</a>
         <span class="dismiss">🗙</span>
     </div>
-<script src="./_framework/blazor.webassembly.js" autostart="false"></script>
-    <script>
-      // Verificamos si el archivo se cargó
-      if (typeof Blazor !== 'undefined') {
-        Blazor.start({
-          loadBootResource: function (type, name, defaultUri, integrity) {
-            // Saltamos la verificación de integridad para GitHub Pages
-            return defaultUri;
-          }
-        });
-      } else {
-        console.error("ERROR: No se detectó el objeto Blazor. Intentando recarga forzada...");
+<script src="_framework/blazor.webassembly.66stpp682q.js" autostart="false"></script>
+
+<script>
+  // El resto del script se queda igual
+  if (typeof Blazor !== 'undefined' || window.Blazor) {
+    Blazor.start({
+      loadBootResource: function (type, name, defaultUri, integrity) {
+        return defaultUri;
       }
-    </script>
+    });
+  }
+</script>
 </body>
 
 </html>
